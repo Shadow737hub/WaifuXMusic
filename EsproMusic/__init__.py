@@ -26,7 +26,6 @@ normal_message_counts = {}
 from EsproMusic.unit.ban import *
 from EsproMusic.unit.sudo import *
 from EsproMusic.unit.react import *
-from EsproMusic.unit.log import *
 from EsproMusic.unit.send_img import *
 from EsproMusic.unit.rarity import *
 
