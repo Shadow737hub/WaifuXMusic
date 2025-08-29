@@ -52,8 +52,8 @@
         "value": "",
         "required": true
       },
-      "Glog": {
-        "description": "bsdk Glog dal",
+      "GLOG": {
+        "description": "bsdk GLOG dal",
         "value": "",
         "required": true
       },
