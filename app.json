@@ -1,8 +1,8 @@
 {
-    "name": "Music X Waifu",
-    "description": "A Telegram Music Player Bot, written in Python with Pyrogram and Py-Tgcalls. and A waifu bot too",
-    "logo": "https://te.legra.ph/file/b8a0c1a00db3e57522b53.jpg",
-    "keywords": [
+  "name": "IᴠᴀɴxNᴏʙɪ Mᴜsɪᴄ",
+  "description": "I Just Do Some Development and fork this repo u can change accouring to you",
+  "logo": "https://te.legra.ph/file/b8a0c1a00db3e57522b53.jpg",
+  "keywords": [
     "python3",
     "telegram",
     "bot",
@@ -10,69 +10,79 @@
     "MusicBot",
     "telegram-bot",
     "pyrogram"
-    ],
-    "env": {
-      "API_ID": {
-        "description": "Get this value from https://my.telegram.org",
-        "value": "",
-        "required": true
-      },
-      "API_HASH": {
-        "description": "Get this value from https://my.telegram.org",
-        "value": "",
-        "required": true
-      },
-      "BOT_TOKEN": {
-        "description": "A Bot's token from Botfather",
-        "value": "",
-        "required": true
-      },
-      "MONGO_DB_URI": {
-        "description": "Get a mongodb url from https://cloud.mongodb.com.",
-        "value": "",
-        "required": true
-      },
-      "OWNER_ID": {
-        "description": "The user id of user whom you would like to add as OWNER.",
-        "value": "",
-        "required": true
-      },
-      "STRING_SESSION": {
-        "description": "A Pyrogram v2 String Session from @EsproStringBot on Telegram.",
-        "value": "",
-        "required": true
-      },
-      "SUPPORT_CHANNEL": {
-        "description": "CHANNEL",
-        "value": "",
-        "required": true
-      },
-      "SUPPORT_CHAT": {
-        "description": "GROUP",
-        "value": "",
-        "required": true
-      },
-      "GLOG": {
-        "description": "bsdk GLOG dal",
-        "value": "",
-        "required": true
-      },
-      "LOGGER_ID": {
-        "description": "Private Group Bana Kar Uska Id Dalo",
-        "value": "",
-        "required": true
-      }
+  ],
+  "env": {
+    "API_ID": {
+      "description": "Get this value from https://my.telegram.org",
+      "value": "22657083",
+      "required": true
     },
-    "buildpacks": [
-          {
-              "url": "heroku/python"
-          },
-          {
-              "url": "heroku/nodejs"
-          },
-          {
-              "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git"
-          }
-      ],
-      "stack": "container"
-  }
+    "API_HASH": {
+      "description": "Get this value from https://my.telegram.org",
+      "value": "d6186691704bd901bdab275ceaab88f3",
+      "required": true
+    },
+    "BOT_TOKEN": {
+      "description": "A Bot's token from Botfather",
+      "value": "8308863644:AAGqjXo-7J8Yv8FJOgHHsk0qkwDV-Xnl2vA",
+      "required": true
+    },
+    "MONGO_DB_URI": {
+      "description": "Get a mongodb url from https://cloud.mongodb.com.",
+      "value": "mongodb+srv://ahaan:ahaad@ahaan.hgkeruq.mongodb.net/?retryWrites=true&w=majority&appName=ahaan",
+      "required": true
+    },
+    "OWNER_ID": {
+      "description": "The user id of user whom you would like to add as OWNER.",
+      "value": "6395780961",
+      "required": true
+    },
+    "STRING_SESSION": {
+      "description": "A Pyrogram v2 String Session from @EsproStringBot on Telegram.",
+      "value": "",
+      "required": true
+    },
+    "SUPPORT_CHANNEL": {
+      "description": "CHANNEL",
+      "value": "https://t.me/waifu_4_u",
+      "required": true
+    },
+    "SUPPORT_CHAT": {
+      "description": "GROUP",
+      "value": "https://t.me/waifu_for_u",
+      "required": true
+    },
+    "GLOG": {
+      "description": "bsdk GLOG dal",
+      "value": "-1003054036422",
+      "required": true
+    },
+    "LOGGER_ID": {
+      "description": "Private Group Bana Kar Uska Id Dalo",
+      "value": "-1003054036422",
+      "required": true
+    },
+    "HEROKU_API_KEY": {
+      "description": "Your Heroku API Key",
+      "value": "your_heroku_api_key_here",
+      "required": true
+    },
+    "HEROKU_APP_NAME": {
+      "description": "Your Heroku App Name",
+      "value": "your_heroku_app_name_here",
+      "required": true
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    },
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git"
+    }
+  ],
+  "stack": "container"
+}
