@@ -3,6 +3,7 @@ import asyncio
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
+from EsproMusic.help import HELP_DATA
 from EsproMusic import YouTube, app
 from EsproMusic.core.call import Loy
 from EsproMusic.misc import SUDOERS, db
