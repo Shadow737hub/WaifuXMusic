@@ -395,3 +395,42 @@ async def markup_timer():
 
 
 asyncio.create_task(markup_timer())
+
+# ====================== Waifu Help Callbacks ====================== #
+
+@app.on_callback_query(filters.regex("waifu_help"))
+async def waifu_help_menu(client, CallbackQuery):
+    buttons = [
+        [
+            InlineKeyboardButton(
+                text=data["HELP_NAME"],
+                callback_data=f"waifu_help_{key}"
+            )
+        ]
+        for key, data in HELP_DATA.items()
+    ]
+    buttons.append(
+        [InlineKeyboardButton(text="⬅ Back", callback_data="settings_back_helper")]
+    )
+
+    await CallbackQuery.edit_message_text(
+        "💖 **Waifu Help Menu**\nSelect a category below:",
+        reply_markup=InlineKeyboardMarkup(buttons),
+    )
+
+
+@app.on_callback_query(filters.regex(r"waifu_help_(.*)"))
+async def waifu_help_detail(client, CallbackQuery):
+    key = CallbackQuery.data.split("waifu_help_")[1]
+    data = HELP_DATA.get(key)
+
+    if not data:
+        return await CallbackQuery.answer("Unknown section!", show_alert=True)
+
+    buttons = [[InlineKeyboardButton(text="⬅ Back", callback_data="waifu_help")]]
+
+    await CallbackQuery.edit_message_text(
+        text=f"**{data['HELP_NAME']}**\n\n{data['HELP']}",
+        reply_markup=InlineKeyboardMarkup(buttons),
+        disable_web_page_preview=True,
+    )
