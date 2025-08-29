@@ -1,6 +1,6 @@
 import re
 from cachetools import TTLCache
-from LCatch import user_collection, collection
+from EsproMusic.utils.database import user_collection, collection
 
 # Caching to reduce database queries but with shorter TTL for freshness
 all_characters_cache = TTLCache(maxsize=10000, ttl=300)  # Reduced from 10 hours to 5 minutes
