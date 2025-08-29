@@ -5,8 +5,7 @@ from pyrogram import idle
 from pytgcalls.exceptions import NoActiveGroupCall
 
 import config
-from EsproMusic import LOGGER
-from EsproMusic.core.clients import app, userbot   # ✅ Direct clients se import
+from EsproMusic import LOGGER, app, userbot
 from EsproMusic.core.call import Loy
 from EsproMusic.misc import sudo
 from EsproMusic.plugins import ALL_MODULES
@@ -24,48 +23,34 @@ async def init():
     ):
         LOGGER(__name__).error("Assistant client variables not defined, exiting...")
         exit()
-
     await sudo()
-
-    # Banned users load
     try:
         users = await get_gbanned()
         for user_id in users:
             BANNED_USERS.add(user_id)
-
         users = await get_banned_users()
         for user_id in users:
             BANNED_USERS.add(user_id)
-    except Exception as e:
-        LOGGER("EsproMusic").warning(f"Failed to load banned users: {e}")
-
-    # Start clients
+    except:
+        pass
     await app.start()
     for all_module in ALL_MODULES:
-        importlib.import_module("EsproMusic.plugins." + all_module)   # ✅ FIXED
+        importlib.import_module("EsproMusic.plugins" + all_module)
     LOGGER("EsproMusic.plugins").info("Successfully Imported Modules...")
-
     await userbot.start()
     await Loy.start()
-
     try:
         await Loy.stream_call("https://te.legra.ph/file/29f784eb49d230ab62e9e.mp4")
     except NoActiveGroupCall:
         LOGGER("EsproMusic").error(
-            "Please turn on the videochat of your log group/channel.\n\nStopping Bot..."
+            "Please turn on the videochat of your log group\channel.\n\nStopping Bot..."
         )
         exit()
-    except Exception:
+    except:
         pass
-
     await Loy.decorators()
-    LOGGER("EsproMusic").info(
-        "EsproMusicBot Started Successfully ✅\n\nSupport: @Esprosupport"
-    )
-
+    LOGGER("EsproMusic").info("EsproMusicBot Started Successfully \n\n Yaha App ko nahi aana hai aapni hf jo bhej sakte hai @Esprosupport ")
     await idle()
-
-    # Stop everything
     await app.stop()
     await userbot.stop()
     LOGGER("EsproMusic").info("Stopping Espro Music Bot...")
