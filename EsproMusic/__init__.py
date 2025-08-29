@@ -23,12 +23,12 @@ user_guess_progress = {}
 normal_message_counts = {}
 
 # -------------------------- POWER SETUP ---------------------------------
-from EsproMusic.unit.zyro_ban import *
-from EsproMusic.unit.zyro_sudo import *
-from EsproMusic.unit.zyro_react import *
-from EsproMusic.unit.zyro_log import *
-from EsproMusic.unit.zyro_send_img import *
-from EsproMusic.unit.zyro_rarity import *
+from EsproMusic.unit.ban import *
+from EsproMusic.unit.sudo import *
+from EsproMusic.unit.react import *
+from EsproMusic.unit.log import *
+from EsproMusic.unit.send_img import *
+from EsproMusic.unit.rarity import *
 
 # ----------------------- ESPRO MUSIC SETUP -------------------------------
 from EsproMusic.core.bot import Loy
