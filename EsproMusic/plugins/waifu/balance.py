@@ -1,4 +1,7 @@
-from EsproMusic.utils.database import user_collection  
+from EsproMusic.core.mongo import mongodb
+
+user_collection = mongodb.user_collection
+
 from EsproMusic import app
 from EsproMusic.misc import SUDOERS
 from pyrogram import Client, filters  
