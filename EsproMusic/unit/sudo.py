@@ -3,8 +3,9 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQ
 from pymongo import MongoClient
 from EsproMusic import *
 from functools import wraps
+from EsproMusic.core.mongo import mongodb
 
-sudo_users = db['sudo_users']
+sudo_users = mongodb.sudo_users
 
 # Predefined powers
 ALL_POWERS = [
