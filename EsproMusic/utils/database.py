@@ -30,6 +30,9 @@ pm_users = mongodb.gaming_pm_users
 destination_collection = mongodb.gamimg_user_collection
 destination_char = mongodb.gaming_anime_characters
 
+collection = destination_char
+user_collection = destination_collection
+
 # Shifting to memory [mongo sucks often]
 active = []
 activevideo = []
