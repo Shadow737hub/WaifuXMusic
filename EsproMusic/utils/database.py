@@ -22,17 +22,6 @@ skipdb = mongodb.skipmode
 sudoersdb = mongodb.sudoers
 usersdb = mongodb.tgusersdb
 
-# 🎮 Gaming / Custom Collections
-user_totals_collection = mongodb.gaming_totals
-group_user_totals_collection = mongodb.gaming_group_total
-top_global_groups_collection = mongodb.gaming_global_groups
-pm_users = mongodb.gaming_pm_users
-destination_collection = mongodb.gamimg_user_collection
-destination_char = mongodb.gaming_anime_characters
-
-collection = destination_char
-user_collection = destination_collection
-
 # Shifting to memory [mongo sucks often]
 active = []
 activevideo = []
