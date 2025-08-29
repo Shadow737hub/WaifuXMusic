@@ -1,46 +1,46 @@
-from EsproMusic import *
 import random
 import asyncio
-from telegram import Update
-from telegram.ext import CallbackContext
-import config
+import time
+from pyrogram import Client, filters
+from EsproMusic import app, last_characters, first_correct_guesses, collection
 
-log = config.LOGGER_ID
+RARITY_WEIGHTS = {
+    "Common 🟠": (40, True),
+    "Legendary 🟡": (20, True),
+    "Exclusive 💮": (12, True),
+    "Limited 🔮": (8, True),
+    "Celestial 🎐": (4, True),
+}
 
-async def delete_message(chat_id, message_id, context):
-    await asyncio.sleep(300)  # 5 minutes (300 seconds)
+# ---------------- Delete message after 5 minutes ---------------- #
+async def delete_message(chat_id, message_id):
+    await asyncio.sleep(300)  # 5 minutes
     try:
-        await context.bot.delete_message(chat_id, message_id)
+        await app.delete_messages(chat_id, message_id)
     except Exception as e:
         print(f"Error deleting message: {e}")
 
-RARITY_WEIGHTS = {
-    "Common 🟠": (40, True),              # Most frequent
-    "Legendary 🟡": (20, True),           # Less frequent than Low
-    "Exclusive 💮": (12, True),             # Rare but obtainable
-    "Limited 🔮": (8, True),   # Very rare
-    "Celestial 🎐": (4, True),     # Extremely rare
-}
-
-async def send_image(update: Update, context: CallbackContext) -> None:
-    chat_id = update.effective_chat.id
+# ---------------- Spawn character ---------------- #
+@app.on_message(filters.command("spawn"))
+async def send_image(client, message):
+    chat_id = message.chat.id
 
     # Fetch all characters from MongoDB
-    all_characters = list(await collection.find({"rarity": {"$in": [k for k, v in RARITY_WEIGHTS.items() if v[1]]}}).to_list(length=None))
+    all_characters = await collection.find(
+        {"rarity": {"$in": [k for k, v in RARITY_WEIGHTS.items() if v[1]]}}
+    ).to_list(length=None)
 
     if not all_characters:
-        await context.bot.send_message(chat_id, "No characters found with allowed rarities in the database.")
-        return
+        return await message.reply("No characters found with allowed rarities in the database.")
 
-    # Filter characters with valid rarity
+    # Filter valid characters
     available_characters = [
-        c for c in all_characters 
+        c for c in all_characters
         if 'id' in c and c.get('rarity') is not None and RARITY_WEIGHTS.get(c['rarity'], (0, False))[1]
     ]
 
     if not available_characters:
-        await context.bot.send_message(chat_id, "No available characters with the allowed rarities.")
-        return
+        return await message.reply("No available characters with the allowed rarities.")
 
     # Weighted random selection
     cumulative_weights = []
@@ -59,32 +59,28 @@ async def send_image(update: Update, context: CallbackContext) -> None:
     if not selected_character:
         selected_character = random.choice(available_characters)
 
-    # Clear first_correct_guesses if exists
-    last_characters[chat_id] = character
+    # Store last character
+    last_characters[chat_id] = selected_character
     last_characters[chat_id]['timestamp'] = time.time()
 
     if chat_id in first_correct_guesses:
         del first_correct_guesses[chat_id]
 
-    # Check if the character has a video URL
+    caption_text = f"""✨ A {selected_character['rarity']} Character Appears! ✨
+🔍 Use /guess to claim this mysterious slave!
+🥂 Hurry, before someone else snatches them!🤭"""
+
+    # Send image or video
     if 'vid_url' in selected_character:
-        sent_message = await context.bot.send_video(
-            chat_id=chat_id,
+        sent_message = await message.reply_video(
             video=selected_character['vid_url'],
-            caption=f"""✨ A {selected_character['rarity']} Character Appears! ✨
-🔍 Use /guess to catch this mysterious slave!
-🥂 Hurry, before someone else snatches them!🤭""",
-            parse_mode='Markdown'
+            caption=caption_text
         )
     else:
-        sent_message = await context.bot.send_photo(
-            chat_id=chat_id,
+        sent_message = await message.reply_photo(
             photo=selected_character['img_url'],
-            caption=f"""✨ A {selected_character['rarity']} Character Appears! ✨
-🔍 Use /guess to claim this mysterious slave!
-🥂 Hurry, before someone else snatches them!🤭""",
-            parse_mode='Markdown'
+            caption=caption_text
         )
 
-    # Schedule message deletion after 5 minutes
-    asyncio.create_task(delete_message(chat_id, sent_message.message_id, context))
+    # Schedule deletion after 5 minutes
+    asyncio.create_task(delete_message(chat_id, sent_message.id))
