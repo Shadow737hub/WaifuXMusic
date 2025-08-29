@@ -2,7 +2,8 @@ import random
 import asyncio
 import time
 from pyrogram import Client, filters
-from EsproMusic import app, last_characters, first_correct_guesses, collection
+from EsproMusic import app, last_characters, first_correct_guesses
+from EsproMusic.utils.database import collection
 
 RARITY_WEIGHTS = {
     "Common 🟠": (40, True),
