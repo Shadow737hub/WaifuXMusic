@@ -20,24 +20,24 @@ def private_panel(_):
     buttons = [
         # 🎵 Music + 💖 Waifu
         [
-            InlineKeyboardButton(text=_["S_B_4"], callback_data="settings_back_helper"),
-            InlineKeyboardButton(text="💖 Waifu", callback_data="waifu_help"),
+            InlineKeyboardButton(text="🎵 ᴍᴜsɪᴄ 🎶", callback_data="settings_back_helper"),
+            InlineKeyboardButton(text="🔮 ᴡᴀɪғᴜ 🔮", callback_data="waifu_help"),
         ],
         # 🆘 Support + 📢 Updates
         [
-            InlineKeyboardButton(text="🆘 Support", url=config.SUPPORT_CHAT),
-            InlineKeyboardButton(text="📢 Updates", url=config.SUPPORT_CHANNEL),
+            InlineKeyboardButton(text=_["S_B_2"], url=config.SUPPORT_CHAT),
+            InlineKeyboardButton(text=_["S_B_3"], url=config.SUPPORT_CHANNEL),
         ],
         # ➕ Add To Group
         [
             InlineKeyboardButton(
-                text="➕ Add me to your group",
+                text="➕ ᴋɪᴅɴᴀᴘᴘᴇ ᴍᴇ ➕",
                 url=f"https://t.me/{app.username}?startgroup=true",
             )
         ],
         # 👑 Owner
         [
-            InlineKeyboardButton(text="👑 Owner", user_id=config.OWNER_ID),
+            InlineKeyboardButton(text="🍸 ᴅᴇᴠᴇʟᴏᴘᴇʀ 🍸", user_id=config.OWNER_ID),
         ],
     ]
     return buttons
