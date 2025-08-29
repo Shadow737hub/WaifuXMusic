@@ -1,5 +1,6 @@
 # ------------------------------ IMPORTS ---------------------------------
 import os
+from functools import lru_cache
 from pyrogram import filters as f
 from pyrogram.types import *
 
@@ -25,11 +26,8 @@ from EsproMusic.unit.react import *
 from EsproMusic.unit.send_img import *
 from EsproMusic.unit.rarity import *
 
-# ----------------------- LAZY IMPORT CLIENTS ----------------------------
-# ❌ Direct app = Loy() banane se circular import hota hai
-# ✅ Iske jagah ek wrapper bana dete hain jo on-demand load kare
-
-from functools import lru_cache
+# -------------------------- LAZY CLIENT SETUP ---------------------------
+import EsproMusic.core.platforms as platforms
 
 @lru_cache(maxsize=1)
 def get_clients():
@@ -37,30 +35,35 @@ def get_clients():
     from EsproMusic.core.userbot import Userbot
     from EsproMusic.core.dir import dirr
     from EsproMusic.core.git import git
-    from EsproMusic.core.platforms import *
 
+    # Setup dirs and git
     dirr()
     git()
 
+    # Init bot + userbot
     app = Loy()
     userbot = Userbot()
 
-    Apple = AppleAPI()
-    Carbon = CarbonAPI()
-    SoundCloud = SoundAPI()
-    Spotify = SpotifyAPI()
-    Resso = RessoAPI()
-    Telegram = TeleAPI()
-    YouTube = YouTubeAPI()
+    # APIs
+    Apple = platforms.AppleAPI()
+    Carbon = platforms.CarbonAPI()
+    SoundCloud = platforms.SoundAPI()
+    Spotify = platforms.SpotifyAPI()
+    Resso = platforms.RessoAPI()
+    Telegram = platforms.TeleAPI()
+    YouTube = platforms.YouTubeAPI()
 
     return app, userbot, Apple, Carbon, SoundCloud, Spotify, Resso, Telegram, YouTube
 
-# 🪄 Export default vars (backward compatibility ke liye)
+# ------------------------- EXPORT FOR MODULES ---------------------------
 app, userbot, Apple, Carbon, SoundCloud, Spotify, Resso, Telegram, YouTube = get_clients()
 
 # --------------------------- PLOG FUNCTION -------------------------------
 async def PLOG(text: str):
-    from info import GLOG
-    await app.send_message(chat_id=GLOG, text=text)
+    from info import GLOG   # Make sure GLOG is defined in info.py
+    await app.send_message(
+        chat_id=GLOG,
+        text=text
+    )
 
 # ---------------------------- END OF CODE -------------------------------
