@@ -40,7 +40,7 @@ async def delete_handler(client, message: Message):
 
 
 # ---------------- Update Character ---------------- #
-@app.on_message(filters.command("update") & filters.user(list(SUDO_USERS)))
+@app.on_message(filters.command("gupdate") & filters.user(list(SUDO_USERS)))
 async def update(client, message: Message):
     try:
         args = message.text.split()
