@@ -4,7 +4,7 @@ from EsproMusic.core.bot import Loy
 from EsproMusic.core.userbot import Userbot
 from EsproMusic.core.dir import dirr
 from EsproMusic.core.git import git
-import EsproMusic.core.platforms as platforms
+import EsproMusic.platforms as platforms
 
 # Run setup
 dirr()
