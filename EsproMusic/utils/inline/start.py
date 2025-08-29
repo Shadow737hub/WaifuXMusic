@@ -20,7 +20,7 @@ def private_panel(_):
     buttons = [
         # 🎵 Music + 💖 Waifu
         [
-            InlineKeyboardButton(text="🎵 Music", url=f"https://t.me/{app.username}?start=music"),
+            InlineKeyboardButton(text=_["S_B_4"], callback_data="settings_back_helper"),
             InlineKeyboardButton(text="💖 Waifu", url=f"https://t.me/{app.username}?start=waifu"),
         ],
         # 🆘 Support + 📢 Updates
