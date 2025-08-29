@@ -207,18 +207,20 @@ async def harem_callback(client: app, callback_query: CallbackQuery):
 
 
 @app.on_message(filters.command("hmode"))
-async def hmode_handler(client: app, message: Message):
+async def hmode_handler(client: Client, message: Message):
     user_id = message.from_user.id
 
+    # Check support channel membership
     if not await check_support_channel(client, user_id):
-        keyboard = [[InlineKeyboardButton("Join Support Channel", url=f"{SUPPORT_CHANNEL}")]]
+        keyboard = [[InlineKeyboardButton("Join Support Channel", url=f"https://t.me/{SUPPORT_CHANNEL.lstrip('@')}")]]
         reply_markup = InlineKeyboardMarkup(keyboard)
         await message.reply_text(
-            f"Please join our support channel to use this command!",
+            f"Please join our support channel {SUPPORT_CHANNEL} to use this command!",
             reply_markup=reply_markup
         )
         return
 
+    # Build rarity selection keyboard
     keyboard = []
     row = []
     for i, (rarity, emoji) in enumerate(rarity_map2.items(), 1):
@@ -233,17 +235,37 @@ async def hmode_handler(client: app, message: Message):
     reply_markup = InlineKeyboardMarkup(keyboard)
     await message.reply_text("Select a rarity to filter your harem:", reply_markup=reply_markup)
 
-
 @app.on_callback_query(filters.regex(r"^set_rarity"))
-async def set_rarity_callback(client: app, callback_query: CallbackQuery):
+async def set_rarity_callback(client: Client, callback_query: CallbackQuery):
     try:
         _, user_id, filter_rarity = callback_query.data.split(':')
         user_id = int(user_id)
         filter_rarity = None if filter_rarity == 'None' else filter_rarity
 
         if callback_query.from_user.id != user_id:
-            return await callback_query.answer("It's not your Harem!", show_alert=True)
+            await callback_query.answer("It's not your Harem!", show_alert=True)
+            return
 
+        # Check support channel membership
         if not await check_support_channel(client, user_id):
-            keyboard = [[InlineKeyboardButton("Join Support Channel", url=f"{SUPPORT_CHANNEL}")]]
-            reply
+            keyboard = [[InlineKeyboardButton("Join Support Channel", url=f"https://t.me/{SUPPORT_CHANNEL.lstrip('@')}")]]
+            reply_markup = InlineKeyboardMarkup(keyboard)
+            await callback_query.message.edit_text(
+                f"Please join our support channel {SUPPORT_CHANNEL} to use this feature!",
+                reply_markup=reply_markup
+            )
+            return
+
+        # Update user's filter_rarity in MongoDB
+        await user_collection.update_one({"id": user_id}, {"$set": {"filter_rarity": filter_rarity}}, upsert=True)
+
+        # Edit message to show which rarity is set
+        if filter_rarity:
+            await callback_query.message.edit_text(f"Rarity filter set to: **{filter_rarity}**")
+        else:
+            await callback_query.message.edit_text("Rarity filter cleared. Showing all rarities.")
+
+        await callback_query.answer(f"Rarity filter set to {filter_rarity if filter_rarity else 'All'}", show_alert=True)
+
+    except Exception as e:
+        print(f"Error in set_rarity callback: {e}")
