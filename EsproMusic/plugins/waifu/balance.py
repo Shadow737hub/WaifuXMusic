@@ -1,4 +1,4 @@
-from EsproMusic.utils.database import user_collectio
+from EsproMusic.utils.database import user_collection
 from EsproMusic import *
 from EsproMusic import app
 from pyrogram import Client, filters
