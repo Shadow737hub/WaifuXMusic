@@ -3,7 +3,6 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQ
 from pymongo import MongoClient
 from EsproMusic import *
 from functools import wraps
-from EsproMusic.misc import db
 
 sudo_users = db['sudo_users']
 
