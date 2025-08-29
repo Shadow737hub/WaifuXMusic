@@ -1,6 +1,6 @@
 {
-    "name": "𝐄𝗌ρ𝗋ⱺ 𝐌ᥙsiᥴ [ ɴᴏ ᴀᴅʂ ] 🕊",
-    "description": "A Telegram Music Player Bot, written in Python with Pyrogram and Py-Tgcalls.",
+    "name": "Music X Waifu",
+    "description": "A Telegram Music Player Bot, written in Python with Pyrogram and Py-Tgcalls. and A waifu bot too",
     "logo": "https://te.legra.ph/file/b8a0c1a00db3e57522b53.jpg",
     "keywords": [
     "python3",
@@ -49,6 +49,11 @@
       },
       "SUPPORT_CHAT": {
         "description": "GROUP",
+        "value": "",
+        "required": true
+      },
+      "Glog": {
+        "description": "bsdk Glog dal",
         "value": "",
         "required": true
       },
