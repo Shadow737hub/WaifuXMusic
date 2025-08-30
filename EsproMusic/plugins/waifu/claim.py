@@ -4,13 +4,14 @@ from pyrogram import filters, enums
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 from EsproMusic import app
 from EsproMusic.core.mongo import mongodb
+import config
 
 # MongoDB collections
 user_collection = mongodb.user_collection
 collection = mongodb.character_collection
 
 # Support channel ID
-SUPPORT_CHAT = "WaifuxDb"
+SUPPORT_CHAT = config.SUPPORT_CHAT
 
 # Claim lock to prevent double claims
 claim_lock = {}
