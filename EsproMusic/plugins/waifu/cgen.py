@@ -13,7 +13,7 @@ redeem_collection = db["redeem_codes"]  # Collection for redeem codes
 
 
 # Command to generate a redeem code (SUDOERS only)
-@app.on_message(filters.command("cgen") & filters.user(list(SUDO_USERS)))
+@app.on_message(filters.command("cgen") & filters.user(list(SUDOERS)))
 async def generate_redeem_code(client, message):
     args = message.command
     if len(args) < 3:
