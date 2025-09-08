@@ -9,7 +9,7 @@ import config
 
 LOG_CHAT_ID = config.LOGGER_ID
 
-collection = mongodb.waifus  
+collection = mongodb.character_collection
 
 
 # Store last spawned characters
