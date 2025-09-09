@@ -19,7 +19,7 @@ from .platforms import *
 from unit import send_img
 from unit import react
 from unit import inline
-from unit import 
+from unit import rarity
 
 Apple = AppleAPI()
 Carbon = CarbonAPI()
