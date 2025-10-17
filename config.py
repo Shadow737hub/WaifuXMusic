@@ -30,10 +30,9 @@ CHARA_CHANNEL_ID = GLOG
 # Get this value from @FallenxBot on Telegram by /id
 OWNER_ID = int(getenv("OWNER_ID", 7653820603))
 
-API_URL = getenv("API_URL", 'https://api.thequickearn.xyz')
+API_URL = getenv("API_URL", 'https://api.thequickearn.xyz') #youtube song url
 VIDEO_API_URL = getenv("VIDEO_API_URL", 'https://api.video.thequickearn.xyz')
-API_KEY = getenv("API_KEY", "NxGBNexGenBots213770")
-
+API_KEY = getenv("API_KEY", "NxGBNexGenBotse3faeb") # youtube song api key, generate free key or buy paid plan from panel.thequickearn.xyz
 
 ## Fill these variables if you're deploying on heroku.
 # Your heroku app name
