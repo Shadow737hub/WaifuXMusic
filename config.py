@@ -17,10 +17,6 @@ BOT_TOKEN = getenv("BOT_TOKEN")
 MONGO_DB_URI = getenv("MONGO_DB_URI", None)
 
 # API URL - here
-API_URL = getenv("API_URL", "https://tgmusic.fallenapi.fun")
-
-# API KEY - here
-API_KEY = getenv("API_KEY", "ef4e80_BwsfbD9PRZGnNH9BKLEFDpgQO_15FVjy")
 
 # For - downloads
 DOWNLOADS_DIR = "downloads"
@@ -36,7 +32,7 @@ OWNER_ID = int(getenv("OWNER_ID", 7653820603))
 
 API_URL = getenv("API_URL", 'https://api.thequickearn.xyz')
 VIDEO_API_URL = getenv("VIDEO_API_URL", 'https://api.video.thequickearn.xyz')
-API_KEY = getenv("API_KEY", '30DxNexGenBotsfcfad8')
+API_KEY = getenv("API_KEY", "NxGBNexGenBots213770")
 
 
 ## Fill these variables if you're deploying on heroku.
